@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd mayer-portfolio && npm run build",
+  "devCommand": "cd mayer-portfolio && npm run dev",
+  "installCommand": "cd mayer-portfolio && npm install",
+  "framework": "nextjs",
+  "outputDirectory": "mayer-portfolio/.next",
+  "rootDirectory": "mayer-portfolio"
+}
