@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github, Eye } from 'lucide-react';
+import { Github } from 'lucide-react';
 import Image from 'next/image';
 
 const Projects = () => {
@@ -85,7 +85,7 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <motion.button
               key={category}
               whileHover={{ scale: 1.05 }}
@@ -211,7 +211,7 @@ const Projects = () => {
           className="text-center mt-16"
         >
           <p className="text-gray-400 mb-6">
-            Interested in working together? Let's discuss your next project!
+            Interested in working together? Let&apos;s discuss your next project!
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}

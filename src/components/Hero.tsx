@@ -56,7 +56,7 @@ const Hero = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-blue-400 font-medium text-lg"
           >
-            Hello, I'm
+            Hello, I&apos;m
           </motion.p>
 
           {/* Name */}
@@ -136,7 +136,7 @@ const Hero = () => {
               { icon: Github, href: 'https://github.com/MayerS22', label: 'GitHub' },
               { icon: Linkedin, href: 'https://www.linkedin.com/in/mayer-frieg-7a0368226/', label: 'LinkedIn' },
               { icon: Mail, href: 'mailto:mayerfrieg@outlook.com', label: 'Email' },
-            ].map((social, index) => (
+            ].map((social) => (
               <motion.a
                 key={social.label}
                 href={social.href}

@@ -56,7 +56,7 @@ const Contact = () => {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Let's discuss your next project or just say hello. I'm always open to new opportunities!
+            Let&apos;s discuss your next project or just say hello. I&apos;m always open to new opportunities!
           </p>
         </motion.div>
 
