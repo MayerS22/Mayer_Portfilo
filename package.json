@@ -13,6 +13,7 @@
     "performance": "npm run build && npm run start & sleep 10 && npm run lighthouse && pkill -f 'next start'"
   },
   "dependencies": {
+    "critters": "^0.0.25",
     "framer-motion": "^12.23.12",
     "glob": "^11.0.3",
     "lucide-react": "^0.540.0",
