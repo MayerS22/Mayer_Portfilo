@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { Github } from 'lucide-react';
 import Image from 'next/image';
 
@@ -11,7 +11,8 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-  const projects = [
+  // Memoize projects data to prevent unnecessary re-renders
+  const projects = useMemo(() => [
     {
       id: 1,
       title: "AutoInsight - Business Intelligence Platform",
@@ -52,14 +53,17 @@ const Projects = () => {
       githubUrl: "https://github.com/MayerS22/E-commerce-Mobile-App",
       category: "Mobile"
     }
-  ];
+  ], []);
 
-  const categories = ["All", "Full-Stack", "Mobile", "Frontend", "Backend", "AI/ML"];
+  const categories = useMemo(() => ["All", "Full-Stack", "Mobile", "Frontend", "Backend", "AI/ML"], []);
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects = useMemo(() => 
+    activeCategory === "All" 
+      ? projects 
+      : projects.filter(project => project.category === activeCategory),
+    [activeCategory, projects]
+  );
 
   return (
     <section id="projects" ref={ref} className="section-padding relative">
@@ -120,7 +124,9 @@ const Projects = () => {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  priority={index < 2} // Prioritize first 2 images
                   onError={(e) => {
                     // Fallback to a gradient background if image fails to load
                     const target = e.target as HTMLImageElement;

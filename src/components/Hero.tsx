@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { useMemo } from 'react';
 
 const Hero = () => {
   const scrollToAbout = () => {
@@ -11,35 +12,75 @@ const Hero = () => {
     }
   };
 
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+  // Memoize static elements to prevent re-renders
+  const backgroundElements = useMemo(() => (
+    <div className="absolute inset-0 overflow-hidden">
+      <motion.div
+        className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1.1, 1, 1.1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
+  ), []);
+
+  const floatingIcons = useMemo(() => (
+    <div className="absolute inset-0 pointer-events-none">
+      {[
+        { icon: '⚛️', x: '10%', y: '20%', delay: 0 },
+        { icon: '🚀', x: '85%', y: '30%', delay: 2 },
+        { icon: '💻', x: '15%', y: '70%', delay: 4 },
+        { icon: '⚡', x: '80%', y: '80%', delay: 6 },
+      ].map((item, index) => (
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"
+          key={index}
+          className="absolute text-4xl opacity-20"
+          style={{ left: item.x, top: item.y }}
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            y: [0, -15, 0],
+            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 8,
+            delay: item.delay,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+        >
+          {item.icon}
+        </motion.div>
+      ))}
+    </div>
+  ), []);
+
+  const socialLinks = useMemo(() => [
+    { icon: Github, href: 'https://github.com/MayerS22', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/mayer-frieg-7a0368226/', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:mayerfrieg@outlook.com', label: 'Email' },
+  ], []);
+
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Background elements */}
+      {backgroundElements}
 
       <div className="container-custom text-center relative z-10">
         {/* Main content */}
@@ -132,11 +173,7 @@ const Hero = () => {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="flex justify-center items-center gap-6 pt-8 relative z-20"
           >
-            {[
-              { icon: Github, href: 'https://github.com/MayerS22', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/mayer-frieg-7a0368226/', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:mayerfrieg@outlook.com', label: 'Email' },
-            ].map((social) => (
+            {socialLinks.map((social) => (
               <motion.a
                 key={social.label}
                 href={social.href}
@@ -154,36 +191,10 @@ const Hero = () => {
             ))}
           </motion.div>
         </motion.div>
-
-        
       </div>
 
       {/* Floating tech icons */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[
-          { icon: '⚛️', x: '10%', y: '20%' },
-          { icon: '🚀', x: '85%', y: '30%' },
-          { icon: '💻', x: '15%', y: '70%' },
-          { icon: '⚡', x: '80%', y: '80%' },
-        ].map((item, index) => (
-          <motion.div
-            key={index}
-            className="absolute text-4xl opacity-20"
-            style={{ left: item.x, top: item.y }}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: 6 + index * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            {item.icon}
-          </motion.div>
-        ))}
-      </div>
+      {floatingIcons}
     </section>
   );
 };

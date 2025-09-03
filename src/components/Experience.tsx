@@ -112,6 +112,15 @@ const Experience = () => {
 
   const courses = [
     {
+      title: 'The Git & GitHub Bootcamp',
+      issuer: 'Udemy',
+      date: 'Aug 2025 – Sept 2025, 17 Hours',
+      description: 'Learn how to use Git and GitHub to manage your code and collaborate with others.',
+      type: 'course',
+      image: '/images/Udemy.jpg',
+      imageAlt: 'Udemy Logo'
+    },
+    {
       title: 'Nest.js: The Complete Developer\'s Guide',
       issuer: 'Udemy',
       date: 'jun 2025 – July 2025, 20 Hours',
