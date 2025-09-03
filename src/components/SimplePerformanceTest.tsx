@@ -2,6 +2,15 @@
 
 import { useEffect, useState } from 'react';
 
+// Extend Performance interface to include memory property
+interface PerformanceWithMemory extends Performance {
+  memory?: {
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+  };
+}
+
 const SimplePerformanceTest = () => {
   const [metrics, setMetrics] = useState({
     loadTime: 0,
@@ -34,11 +43,13 @@ const SimplePerformanceTest = () => {
 
       // Memory usage (if available)
       if ('memory' in performance) {
-        const memory = (performance as any).memory;
-        setMetrics(prev => ({ 
-          ...prev, 
-          memoryUsage: Math.round(memory.usedJSHeapSize / 1024 / 1024) 
-        }));
+        const memory = (performance as PerformanceWithMemory).memory;
+        if (memory) {
+          setMetrics(prev => ({ 
+            ...prev, 
+            memoryUsage: Math.round(memory.usedJSHeapSize / 1024 / 1024) 
+          }));
+        }
       }
 
       setMetrics(prev => ({ ...prev, loadTime }));
