@@ -1,13 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
-import Projects from '@/components/Projects';
-import Experience from '@/components/Experience';
 import Contact from '@/components/Contact';
 import Navigation from '@/components/Navigation';
 import SimplePerformanceTest from '@/components/SimplePerformanceTest';
