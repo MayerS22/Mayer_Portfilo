@@ -35,7 +35,7 @@ const SimplePerformanceTest = () => {
 
       // First Paint
       if ('performance' in window) {
-        const paintEntries = performance.getEntriesByType('paint');
+        const paintEntries = performance.getEntriesByType('paint') as PerformanceEntry[];
         if (paintEntries.length > 0) {
           setMetrics(prev => ({ ...prev, firstPaint: paintEntries[0].startTime }));
         }
