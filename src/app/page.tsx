@@ -1,5 +1,4 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
@@ -8,7 +7,6 @@ import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import Navigation from '@/components/Navigation';
-import SimplePerformanceTest from '@/components/SimplePerformanceTest';
 
 // Lazy load heavy components
 const LazyProjects = dynamic(() => import('@/components/Projects'), {
@@ -85,9 +83,6 @@ export default function Home() {
         <LazyExperience />
         <Contact />
       </div>
-
-      {/* Simple performance monitoring in development */}
-      <SimplePerformanceTest />
     </main>
   );
 }
